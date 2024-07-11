@@ -47,7 +47,7 @@ export const Register = () => {
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                             Email
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email" {...register("email", { required: true })}/>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" {...register("email", { required: true })}/>
                     </div>
                     <div className="mb-4 form-control">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birth-date">
