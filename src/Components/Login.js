@@ -21,7 +21,9 @@ export const Login = () => {
             .then(response => {
                 console.log('Logging in successful', response.data);
                 setIsError(false);
-                auth.login(response.data);
+                const token = response.data;
+                localStorage.setItem('authToken', token);
+                auth.login(token);
                 navigate('/');
             })
             .catch(error => {

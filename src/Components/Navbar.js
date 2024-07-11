@@ -3,6 +3,7 @@ import { useAuth } from "./auth";
 import { useNavigate } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { useState } from "react";
+import { CgLogOut } from "react-icons/cg";
 
 export const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -12,6 +13,7 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         auth.logout();
+        setDropdownOpen(false);
         navigate('/');
     }
 
@@ -57,7 +59,7 @@ export const Navbar = () => {
                 {auth.user && (
                     <div>
                         <button
-                            className="inline-block bg-gray-700 rounded hover:border-gray-200 text-white hover:bg-gray-900 py-1 px-3"
+                            className="inline-block bg-gray-700 rounded hover:border-gray-200 text-white hover:bg-gray-900 py-2 px-4"
                             onClick={() => setDropdownOpen(!dropdownOpen)}
                         >
                             <VscAccount />
@@ -68,13 +70,16 @@ export const Navbar = () => {
                                     className="rounded block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                                     onClick={handleLogout}
                                 >
-                                    Logout
+                                    <div className="flex items-center">
+                                        <CgLogOut className="mr-2" />
+                                        Logout
+                                    </div>
+                                    
                                 </button>
                             </div>
                         )}
                     </div>
                 )}
-                
             </nav>
         </>
         
