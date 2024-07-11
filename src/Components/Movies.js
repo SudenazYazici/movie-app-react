@@ -45,8 +45,8 @@ export const Movies = () => {
     return(
         <>
             <div>
-                <h1 className="inline-block rounded text-white bg-slate-900 py-1 px-3">Movie List</h1>
-                <ul className="movie-list">
+                <h1 className="inline-block rounded text-white bg-slate-900 py-1 px-3 mx-10">Movie List</h1>
+                <ul className="movie-list mx-10">
                     {movies.map(movie => (
                     <li key={movie.id} className="movie-item">
                         <Link to={`/movies/${movie.id}`} className="btn btn-primary">
