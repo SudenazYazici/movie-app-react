@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
     const [isError, setIsError] = useState(false);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -17,6 +19,7 @@ export const Register = () => {
             .then(response => {
                 console.log('Registration successful', response.data);
                 setIsError(false);
+                navigate('/login');
             })
             .catch(error => {
                 console.error('There was an error registering!', error);
