@@ -19,11 +19,13 @@ export const Login = () => {
     const onSubmit = (data) => {
         axios.post('https://localhost:7030/api/User/login', data)
             .then(response => {
-                console.log('Logging in successful', response.data);
+                const user = response.data;
+
+                console.log('Logging in successful');
                 setIsError(false);
-                const token = response.data;
-                localStorage.setItem('authToken', token);
-                auth.login(token);
+                localStorage.setItem('userInfo', user);
+                localStorage.setItem('userId', user.id);
+                auth.login(user);
                 navigate('/');
             })
             .catch(error => {
@@ -31,7 +33,6 @@ export const Login = () => {
                 setIsError(true);
             });
 
-        
     };
 
     return(

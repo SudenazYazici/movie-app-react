@@ -31,7 +31,6 @@ export const MovieTheatres = () => {
                                 Address
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Operations
                             </th>
                         </tr>
                     </thead>

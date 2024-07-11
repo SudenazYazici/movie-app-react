@@ -1,25 +1,30 @@
 import { useState, createContext, useContext } from "react";
 import { useEffect } from "react";
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext({id: 1});// maybe export???
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    //const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            setUser({ token });
+        const userInfo = localStorage.getItem('userInfo');
+        //const userId = localStorage.getItem('userId');
+        if (userInfo) {
+            setUser({ userInfo });
+            //setUserId({ userId });
         }
     }, []);
 
     const login = (user) => {
         setUser({user});
+        //setUserId({ userId });
     }
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem('authToken');
+        //setUserId(null);
+        localStorage.clear();
     }
 
     return (

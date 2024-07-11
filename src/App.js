@@ -10,10 +10,10 @@ import { Register } from './Components/Register';
 import { Login } from './Components/Login';
 import { BookTickets } from './Components/BookTickets';
 import { MovieDetails } from './Components/MovieDetails';
-import { MovieTheatreDetails } from './Components/MovieTheatreDetails';
 import { NoMatch } from './Components/NoMatch';
 import { Profile } from './Components/Profile';
 import { AuthProvider } from './Components/auth';
+import { UserTickets } from './Components/UserTickets';
 
 
 function App() {
@@ -27,11 +27,11 @@ function App() {
             <Route path='movies' element={<Movies/>}/>
             <Route path='movies/:id' element={<MovieDetails/>}/>
             <Route path='movie-theatres' element={<MovieTheatres/>}/>
-            <Route path='movie-theatres/:theatreName' element={<MovieTheatreDetails/>}/>
             <Route path='book-tickets' element={<BookTickets/>}/>
             <Route path='register' element={<Register/>}/>
             <Route path='login' element={<Login/>}/>
             <Route path='profile' element={<Profile/>}/>
+            <Route path='tickets' element={<UserTickets/>}/>
             <Route path='*' element={<NoMatch/>}/>
           </Routes>
         </div>
