@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "./auth";
 import { useNavigate } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
+import { useState } from "react";
 
 export const Navbar = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false)
 
     const auth = useAuth();
     const navigate = useNavigate();
@@ -53,9 +56,22 @@ export const Navbar = () => {
                 )}
                 {auth.user && (
                     <div>
-                        <button className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3" onClick={handleLogout}>
-                            Log out
+                        <button
+                            className="inline-block bg-gray-700 rounded hover:border-gray-200 text-white hover:bg-gray-900 py-1 px-3"
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                        >
+                            <VscAccount />
                         </button>
+                        {dropdownOpen && (
+                            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
+                                <button
+                                    className="rounded block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
                 
