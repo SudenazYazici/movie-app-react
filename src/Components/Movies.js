@@ -50,19 +50,17 @@ export const Movies = () => {
                     {movies.map(movie => (
                     <li key={movie.id} className="movie-item">
                         <Link to={`/movies/${movie.id}`} className="btn btn-primary">
-                            <img 
-                                src={getImagePath(movie.name)} 
-                                alt={movie.name} 
-                                width="125" 
-                                height="225" 
-                                className="movie-image rounded"
-                            />
-                            <div className="movie-details">
-                                {movie.name}
+                            <div className="movie-container">
+                                <img 
+                                    src={getImagePath(movie.name)} 
+                                    alt={movie.name} 
+                                    className="movie-image rounded"
+                                />
+                                <div className="movie-details">
+                                    {movie.name}
+                                </div>
                             </div>
-                        
                         </Link>
-                        
                     </li>
                     ))}
                 </ul>

@@ -90,3 +90,36 @@ li {
 
 }
 
+.movie-container {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+}
+
+.movie-image {
+  display: block;
+  transition: transform 0.3s ease;
+  width: 100%;
+  height: auto;
+}
+
+.movie-container:hover .movie-image {
+  transform: scale(1.1);
+  filter: brightness(0.3);
+}
+
+.movie-details {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-container:hover .movie-details {
+  opacity: 1;
+}
