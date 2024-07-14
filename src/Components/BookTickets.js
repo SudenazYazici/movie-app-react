@@ -1,15 +1,27 @@
 import { useAuth } from "./auth";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export const BookTickets = () => {
 
     const auth = useAuth();
 
     const [movies, setMovies] = useState([]);
-    const [selectedMovieId, setSelectedMovieId] = useState(null);
+    const [selectedMovieId, setSelectedMovieId] = useState("");
     const [theatres, setTheatres] = useState([]);
-    const [selectedTheatreId, setSelectedTheatreId] = useState(null);
+    const [selectedTheatreId, setSelectedTheatreId] = useState("");
+    const [cinemaHalls, setCinemaHalls] = useState([]);
+    const [selectedCinemaHallId, setSelectedCinemaHallId] = useState("");
+    const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+    const [seats, setSeats] = useState([]);
+    const [selectedSeatId, setSelectedSeatId] = useState("");
+    const [userTickets, setUserTickets] = useState([]);
+    /* const [startIndex, setStartIndex] = useState(0);
+    const moviesPerPage = 6; */
+
     const getImagePath = (movieName) => {
         try {
           return require(`.././MovieImages/${movieName}.jpg`);
@@ -35,7 +47,26 @@ export const BookTickets = () => {
         .catch(error => {
             console.error('There was an error fetching the data!', error);
         })
+        /* if (auth.user) {
+            const userTicketsResponse = axios.get(`https://localhost:7030/api/User/${auth.user.id}/tickets`);
+            setUserTickets(userTicketsResponse.data);
+        } */
     }, []);
+
+    useEffect(() => {
+        if (selectedTheatreId) {
+            const fetchCinemaHalls = async () => {
+                try {
+                    const response = await axios.get(`https://localhost:7030/api/CinemaHall`); // add ?cinemaId=${selectedTheatreId}  ???
+                    setCinemaHalls(response.data);
+                } catch (error) {
+                    console.error('Error fetching cinema halls:', error);
+                }
+            };
+
+            fetchCinemaHalls();
+        }
+    }, [selectedTheatreId]);
 
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);
@@ -43,6 +74,49 @@ export const BookTickets = () => {
     const handleMovieClick = (id) => {
         setSelectedMovieId(id);
     };
+    const handleCinemaHallChange = (event) => {
+        setSelectedCinemaHallId(event.target.value);
+    };
+    const handleDateTimeChange = (date) => {
+        setSelectedDateTime(date);
+    };
+    const handleSeatChange = (event) => {
+        setSelectedSeatId(event.target.value);
+    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!selectedMovieId || !selectedTheatreId || !selectedCinemaHallId || !selectedDateTime) {
+            alert("Please select a movie, theatre, cinema hall, seat, and date-time.");
+            return;
+        }
+
+        const selectedMovie = movies.find(movie => movie.id === selectedMovieId);
+        const ticketData = {
+            movieName: selectedMovie.name,
+            userId: auth.user.id,
+            cinemaId: selectedTheatreId,
+            cinemaHallId: selectedCinemaHallId,
+            seatId: selectedSeatId,
+            date: selectedDateTime,
+            price: 10 // Assuming a default price
+        };
+
+        try {
+            const response = axios.post('https://localhost:7030/api/Ticket', ticketData);
+            setUserTickets([...userTickets, response.data]);
+            alert("Ticket booked successfully!");
+        } catch (error) {
+            console.error('Error booking ticket:', error);
+            alert("Error booking ticket. Please try again.");
+        }
+    };
+    /* const handleNextClick = () => { // use these later
+        setStartIndex(startIndex + moviesPerPage);
+    }; 
+    const handlePrevClick = () => {
+        setStartIndex(startIndex - moviesPerPage);
+    }; */
 
     return(
         <>
@@ -72,7 +146,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-gray-200 dark:bg-gray-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
@@ -90,11 +164,10 @@ export const BookTickets = () => {
                     </div>
 
                     <div>
-                        <h1 className="inline-block rounded text-white bg-slate-900 py-1 px-3 mx-10">Movie List</h1>
                         <ul className="movie-list mx-10">
                             {movies.map(movie => (
                             <li key={movie.id} 
-                            className={`relative p-4 cursor-pointer ${selectedMovieId === movie.id ? 'border border-red-500' : ''}`}
+                            className={`relative p-4 cursor-pointer ${selectedMovieId === movie.id ? 'border border-red-500 rounded' : ''}`}
                             onClick={() => handleMovieClick(movie.id)}>
                                 <div className="movie-container">
                                         <img 
@@ -110,9 +183,79 @@ export const BookTickets = () => {
                             ))}
                         </ul>
                     </div>
+                    {/* {selectedTheatreId && selectedMovieId && (
+                        <div className="text-center mt-4">
+                            <button
+                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={handleBookTicket}
+                            >
+                                Book Ticket
+                            </button>
+                        </div>
+                    )} */}
+                    <div className="flex">
+
+                        {selectedTheatreId && (
+                            <div className="mt-10 mx-10">
+                                <label htmlFor="cinemaHall" className="block text-sm font-medium text-gray-700">Select Cinema Hall</label>
+                                <select
+                                    id="cinemaHall"
+                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    value={selectedCinemaHallId}
+                                    onChange={handleCinemaHallChange}
+                                >
+                                    <option value="">Select a cinema hall</option>
+                                    {cinemaHalls.map(hall => (
+                                        <option key={hall.id} value={hall.id}>{hall.hallNum}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {selectedTheatreId && (
+                            <div className="mt-10 mx-10">
+                                <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
+                                <select
+                                    id="seat"
+                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    value={selectedSeatId}
+                                    onChange={handleSeatChange}
+                                >
+                                    <option value="">Select a seat</option>
+                                    {seats.map(seat => (
+                                        <option key={seat.id} value={seat.id}>{seat.id}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {selectedTheatreId && (
+                            <div className="mt-10 mx-10">
+                                <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
+                                <DatePicker
+                                    id="dateTime"
+                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    selected={selectedDateTime}
+                                    onChange={handleDateTimeChange}
+                                    showTimeSelect
+                                    dateFormat="Pp"
+                                />
+                            </div>
+                        )}
+
+                        {selectedTheatreId && selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime && (
+                            <div className="text-center mt-4">
+                                <button
+                                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                    onClick={handleSubmit}
+                                >
+                                    Book Ticket
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </>
-        
     );
 }
