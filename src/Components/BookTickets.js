@@ -14,6 +14,11 @@ export const BookTickets = () => {
                     <p>Please first sign in or sign up.</p>
                 </div>
             )}
+            {auth.user && (
+                <div>
+                   
+                </div>
+            )}
         </>
         
     );

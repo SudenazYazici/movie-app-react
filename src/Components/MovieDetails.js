@@ -33,15 +33,15 @@ export const MovieDetails = () => {
             <div>
             <h1 className="mb-5 inline-block rounded text-white bg-slate-900 py-1 px-3">Movie Details</h1>
             <div className="movie-item">
-              <div className="mb-5 movie-container">
+              <div className="mb-5 flex">
                 <img 
                   src={getImagePath(movie.name)} 
                   alt={movie.name} 
                   width="300" 
                   height="450" 
-                  className="movie-image rounded"
+                  className="rounded"
                   />
-                  <div className="ml-5 movie-details">
+                  <div className="ml-5">
                     <div className="flex items-center space-x-2">
                       <h2 className="font-bold">Movie Name:</h2>
                       <p>{movie.name}</p>
