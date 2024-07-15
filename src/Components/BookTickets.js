@@ -90,7 +90,7 @@ export const BookTickets = () => {
     const handleSeatChange = (event) => {
         setSelectedSeatId(event.target.value);
     };
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         if (!selectedMovieId || !selectedTheatreId || !selectedCinemaHallId || !selectedDateTime) {
@@ -109,14 +109,13 @@ export const BookTickets = () => {
             price: 10 // Assuming a default price
         };
 
-        try {
-            const response = axios.post('https://localhost:7030/api/Ticket', ticketData);
-            setUserTickets([...userTickets, response.data]);
-            alert("Ticket booked successfully!");
-        } catch (error) {
-            console.error('Error booking ticket:', error);
-            alert("Error booking ticket. Please try again.");
-        }
+        axios.post('https://localhost:7030/api/Ticket', ticketData)
+            .then(response => {
+                console.log('Registration successful', response.data);
+            })
+            .catch(error => {
+                console.error('There was an error buying ticket!', error);
+            });
     };
     /* const handleNextClick = () => { // use these later
         setStartIndex(startIndex + moviesPerPage);
@@ -153,7 +152,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-gray-200 dark:bg-gray-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
@@ -207,7 +206,7 @@ export const BookTickets = () => {
                                 <label htmlFor="cinemaHall" className="block text-sm font-medium text-gray-700">Select Cinema Hall</label>
                                 <select
                                     id="cinemaHall"
-                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     value={selectedCinemaHallId}
                                     onChange={handleCinemaHallChange}
                                 >
@@ -224,7 +223,7 @@ export const BookTickets = () => {
                                 <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
                                 <select
                                     id="seat"
-                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     value={selectedSeatId}
                                     onChange={handleSeatChange}
                                 >
@@ -241,7 +240,7 @@ export const BookTickets = () => {
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
                                 <DatePicker
                                     id="dateTime"
-                                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     selected={selectedDateTime}
                                     onChange={handleDateTimeChange}
                                     showTimeSelect
@@ -251,7 +250,7 @@ export const BookTickets = () => {
                         )}
 
                         {selectedTheatreId && selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime && (
-                            <div className="text-center mt-4">
+                            <div className="text-center mt-10 mx-10">
                                 <button
                                     className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                                     onClick={handleSubmit}
