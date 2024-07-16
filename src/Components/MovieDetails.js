@@ -16,7 +16,7 @@ export const MovieDetails = () => {
       };
 
     useEffect(() => {
-        axios.get(`https://localhost:7030/api/Movie/${id}`)
+        axios.get(`https://localhost:7030/api/Movie/by-id/${id}`)
           .then(response => {
             setMovie(response.data);
             console.log(response.data);
