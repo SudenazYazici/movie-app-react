@@ -55,7 +55,7 @@ export const BookTickets = () => {
 
     useEffect(() => {
         if (selectedTheatreId) {
-            axios.get('https://localhost:7030/api/CinemaHall')
+            axios.get(`https://localhost:7030/api/Cinema/${selectedTheatreId}/cinemaHalls`)
             .then(response => {
                 setCinemaHalls(response.data);
                 console.log(response.data);
@@ -64,7 +64,8 @@ export const BookTickets = () => {
                 console.error('There was an error fetching the data!', error);
             })
 
-            axios.get('https://localhost:7030/api/Seat')
+            if(selectedCinemaHallId) {
+                axios.get(`https://localhost:7030/api/CinemaHall/${selectedCinemaHallId}/seats`)
             .then(response => {
                 setSeats(response.data);
                 console.log(response.data);
@@ -72,8 +73,9 @@ export const BookTickets = () => {
             .catch(error => {
                 console.error('There was an error fetching the data!', error);
             })
+            }
         }
-    }, [selectedTheatreId]);
+    }, [selectedTheatreId, selectedCinemaHallId]);
 
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);
@@ -153,7 +155,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
