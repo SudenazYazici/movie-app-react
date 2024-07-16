@@ -98,15 +98,17 @@ export const BookTickets = () => {
             return;
         }
 
+        console.log(auth.user);
+
         const selectedMovie = movies.find(movie => movie.id === selectedMovieId);
         const ticketData = {
-            movieName: selectedMovie.name,
-            userId: auth.user.id,
-            cinemaId: selectedTheatreId,
-            cinemaHallId: selectedCinemaHallId,
-            seatId: selectedSeatId,
-            date: selectedDateTime,
-            price: 10 // Assuming a default price
+            MovieName: selectedMovie.name,
+            UserId: auth.user.id,
+            CinemaId: selectedTheatreId,
+            CinemaHallId: selectedCinemaHallId,
+            SeatId: selectedSeatId,
+            Date: selectedDateTime.toISOString(),
+            Price: 10 // Assuming a default price
         };
 
         axios.post('https://localhost:7030/api/Ticket', ticketData)
@@ -133,7 +135,6 @@ export const BookTickets = () => {
             )}
             {auth.user && (
                 <div>
-
                     <div className="relative overflow-x-auto rounded mt-10 mx-10">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -152,7 +153,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
@@ -206,7 +207,7 @@ export const BookTickets = () => {
                                 <label htmlFor="cinemaHall" className="block text-sm font-medium text-gray-700">Select Cinema Hall</label>
                                 <select
                                     id="cinemaHall"
-                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     value={selectedCinemaHallId}
                                     onChange={handleCinemaHallChange}
                                 >
@@ -223,7 +224,7 @@ export const BookTickets = () => {
                                 <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
                                 <select
                                     id="seat"
-                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     value={selectedSeatId}
                                     onChange={handleSeatChange}
                                 >
@@ -240,7 +241,7 @@ export const BookTickets = () => {
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
                                 <DatePicker
                                     id="dateTime"
-                                    className="mb-5 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                                     selected={selectedDateTime}
                                     onChange={handleDateTimeChange}
                                     showTimeSelect

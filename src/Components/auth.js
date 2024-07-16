@@ -1,7 +1,7 @@
 import { useState, createContext, useContext } from "react";
 import { useEffect } from "react";
 
-export const AuthContext = createContext({id: 1});// maybe export???
+export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
@@ -17,8 +17,9 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     const login = (user) => {
-        setUser({user});
+        setUser(user);
         //setUserId({ userId });
+        localStorage.setItem('userInfo', JSON.stringify(user));
     }
 
     const logout = () => {
