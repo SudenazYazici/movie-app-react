@@ -128,6 +128,10 @@ export const BookTickets = () => {
         setStartIndex(startIndex - moviesPerPage);
     }; */
 
+    const today = new Date();
+    const oneWeekFromToday = new Date();
+    oneWeekFromToday.setDate(today.getDate() + 7);
+
     return(
         <>
             {!auth.user && (
@@ -248,6 +252,10 @@ export const BookTickets = () => {
                                     onChange={handleDateTimeChange}
                                     showTimeSelect
                                     dateFormat="Pp"
+                                    minDate={new Date()}
+                                    maxDate={oneWeekFromToday}
+                                    minTime={new Date(0, 0, 0, 9, 0)}
+                                    maxTime={new Date(0, 0, 0, 23, 30)}
                                 />
                             </div>
                         )}
