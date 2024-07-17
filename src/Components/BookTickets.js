@@ -236,7 +236,7 @@ export const BookTickets = () => {
                                 >
                                     <option value="">Select a seat</option>
                                     {seats.map(seat => (
-                                        <option key={seat.id} value={seat.id}>{seat.id}</option>
+                                        <option key={seat.id} value={seat.id}>{seat.seatNum}</option>
                                     ))}
                                 </select>
                             </div>
