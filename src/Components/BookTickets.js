@@ -39,19 +39,22 @@ export const BookTickets = () => {
             console.error('There was an error fetching the data!', error);
         })
 
-        axios.get('https://localhost:7030/api/Movie')
-        .then(response => {
-            setMovies(response.data);
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.error('There was an error fetching the data!', error);
-        })
+        if(selectedTheatreId) {
+            axios.get(`https://localhost:7030/api/Cinema/${selectedTheatreId}/movies`)
+            .then(response => {
+                setMovies(response.data);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            })
+        }
+
         /* if (auth.user) {
             const userTicketsResponse = axios.get(`https://localhost:7030/api/User/${auth.user.id}/tickets`);
             setUserTickets(userTicketsResponse.data);
         } */
-    }, []);
+    }, [selectedTheatreId]);
 
     useEffect(() => {
         if (selectedTheatreId) {
