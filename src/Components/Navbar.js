@@ -44,7 +44,7 @@ export const Navbar = () => {
                     </NavLink>
                 </div>
                 {!auth.user && (
-                    <div>
+                    <div className="flex items-center">
                         <SearchBar/>
                         <NavLink to='/login'>
                             <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>

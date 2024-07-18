@@ -42,9 +42,9 @@ export const SearchBar = () => {
                 <input value={input || ''} onChange={handleInputChange} className="mx-2 rounded w-56 text-black px-1" placeholder="Search a movie"/>
             </div>
             {dropdownOpen && (
-                <ul className="absolute z-10 bg-white shadow-lg rounded mt-2 w-56 max-h-60 overflow-y-auto">
+                <ul className="absolute z-10 bg-white shadow-lg rounded mt-2 w-56 max-h-60 overflow-y-auto divide-y divide-slate-400/25">
                 {filteredMovies.map(movie => (
-                <li key={movie.id} className="text-black mx-2 block border-b border-gray-200">
+                <li key={movie.id} className="text-black mx-2 block ">
                     <Link to={`/movies/${movie.id}`} className="btn btn-primary block p-2 mb-2 hover:bg-gray-100">
                         <div>
                             <div>
