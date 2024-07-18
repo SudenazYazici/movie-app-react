@@ -82,6 +82,7 @@ export const BookTickets = () => {
 
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);
+        setSelectedMovieId("");
     };
     const handleMovieClick = (id) => {
         setSelectedMovieId(id);
