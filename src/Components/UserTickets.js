@@ -9,7 +9,6 @@ export const UserTickets = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const [tickets, setTickets] = useState([]);
-    //const [popup, setPopup] = useState([]);
     const userId = localStorage.getItem('userId');
     useEffect(() => {
         console.log(user)
@@ -37,7 +36,10 @@ export const UserTickets = () => {
     }
 
     const onClick = (ticketId) => {
-        axios.delete(`https://localhost:7030/api/Ticket/${ticketId}`)
+        const userConfirmed = window.confirm("Are you sure you want to delete this ticket?");
+
+        if(userConfirmed) {
+            axios.delete(`https://localhost:7030/api/Ticket/${ticketId}`)
             .then(response => {
                 console.log('Deletion successful', response.data);
                 window.location.reload();
@@ -45,6 +47,8 @@ export const UserTickets = () => {
             .catch(error => {
                 console.error('There was an error deleting!', error);
             });
+        }
+        
     };
 
     return(
