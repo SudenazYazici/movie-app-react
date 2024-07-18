@@ -14,6 +14,7 @@ import { NoMatch } from './Components/NoMatch';
 import { Profile } from './Components/Profile';
 import { AuthProvider } from './Components/auth';
 import { UserTickets } from './Components/UserTickets';
+import { Admin } from './Components/Admin';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path='login' element={<Login/>}/>
             <Route path='profile' element={<Profile/>}/>
             <Route path='tickets' element={<UserTickets/>}/>
+            <Route path='admin' element={<Admin/>}/>
             <Route path='*' element={<NoMatch/>}/>
           </Routes>
         </div>

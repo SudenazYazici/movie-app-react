@@ -23,22 +23,22 @@ export const Navbar = () => {
             <nav className="absolute w-full p-4 flex items-center justify-between z-50">
                 <div>
                     <NavLink to='/'>
-                        <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                        <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                             Home
                         </button>
                     </NavLink>
                     <NavLink to='/movies'>
-                        <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                        <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                             Movies
                         </button>
                     </NavLink>
                     <NavLink to='/movie-theatres'>
-                        <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                        <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                             Movie Theatres
                         </button>
                     </NavLink>
                     <NavLink to='/book-tickets'>
-                        <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                        <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                             Book Tickets
                         </button>
                     </NavLink>
@@ -46,8 +46,13 @@ export const Navbar = () => {
                 {!auth.user && (
                     <div className="flex items-center">
                         <SearchBar/>
+                        <NavLink to='/admin'>
+                            <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                Admin
+                            </button>
+                        </NavLink>
                         <NavLink to='/login'>
-                            <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                            <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                 Login
                             </button>
                         </NavLink>
