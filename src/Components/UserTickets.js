@@ -60,11 +60,11 @@ export const UserTickets = () => {
                         <li key={ticket.id} className="mb-2">
                             <div className="bg-white text-black shadow-md rounded px-4 py-2">
                                 <h2 className="text-lg font-bold">Movie: {ticket.movieName}</h2>
-                                <p>Cinema: {ticket.cinemaId}</p>
-                                <p>Cinema Hall: {ticket.cinemaHallId}</p>
-                                <p>Seat: {ticket.seatId}</p>
-                                <p>Date: {formatDateTime(ticket.date)}</p>
-                                <p>Price: {ticket.price}</p>
+                                <p className="text-neutral-500">Cinema: {ticket.cinemaId}</p>
+                                <p className="text-neutral-500">Cinema Hall: {ticket.cinemaHallId}</p>
+                                <p className="text-neutral-500">Seat: {ticket.seatId}</p>
+                                <p className="text-neutral-500">Date: {formatDateTime(ticket.date)}</p>
+                                <p className="text-neutral-500">Price: {ticket.price}</p>
                                 <button onClick={() => onClick(ticket.id)} className="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                                     Delete Ticket
                                 </button>

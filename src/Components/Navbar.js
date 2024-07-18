@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { useState } from "react";
 import { CgLogOut } from "react-icons/cg";
+import { SearchBar } from "./SearchBar";
 
 export const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -44,6 +45,7 @@ export const Navbar = () => {
                 </div>
                 {!auth.user && (
                     <div>
+                        <SearchBar/>
                         <NavLink to='/login'>
                             <button className="inline-block rounded text-red-400 hover:bg-slate-900 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                 Login
@@ -58,12 +60,16 @@ export const Navbar = () => {
                 )}
                 {auth.user && (
                     <div>
-                        <button
-                            className="inline-block bg-gray-700 rounded hover:border-gray-200 text-white hover:bg-gray-900 py-2 px-4"
-                            onClick={() => setDropdownOpen(!dropdownOpen)}
-                        >
-                            <VscAccount />
-                        </button>
+                        <div className="flex items-center">
+                            <SearchBar/>
+                            <button
+                                className="inline-block bg-gray-700 rounded hover:border-gray-200 text-white hover:bg-gray-900 py-2 px-4"
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                            >
+                                <VscAccount />
+                            </button>
+                        </div>
+                        
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
                                 <NavLink to='/tickets'>
