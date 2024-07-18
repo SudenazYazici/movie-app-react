@@ -9,6 +9,7 @@ export const UserTickets = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const [tickets, setTickets] = useState([]);
+    //const [popup, setPopup] = useState([]);
     const userId = localStorage.getItem('userId');
     useEffect(() => {
         console.log(user)
@@ -35,6 +36,17 @@ export const UserTickets = () => {
           return new Intl.DateTimeFormat("en-US", options).format(new Date(date));
     }
 
+    const onClick = (ticketId) => {
+        axios.delete(`https://localhost:7030/api/Ticket/${ticketId}`)
+            .then(response => {
+                console.log('Deletion successful', response.data);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('There was an error deleting!', error);
+            });
+    };
+
     return(
         <>
             <h1 className="text-xl font-bold mb-4">User Tickets</h1>
@@ -49,6 +61,9 @@ export const UserTickets = () => {
                                 <p>Seat: {ticket.seatId}</p>
                                 <p>Date: {formatDateTime(ticket.date)}</p>
                                 <p>Price: {ticket.price}</p>
+                                <button onClick={() => onClick(ticket.id)} className="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                    Delete Ticket
+                                </button>
                             </div>
                         </li>
                     ))}

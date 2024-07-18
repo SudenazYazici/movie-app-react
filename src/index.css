@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(30 41 59);;
+  background-color: rgb(26, 26, 26); /* rgb(30 41 59) */
   color: white;
 }
 
@@ -15,7 +15,7 @@ code {
 }
 
 nav {
-  background-color: rgb(17 24 39);
+  background-color: black; /* rgb(17 24 39) */
   padding: 16px;
 }
 
