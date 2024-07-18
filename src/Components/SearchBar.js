@@ -36,10 +36,10 @@ export const SearchBar = () => {
       }
 
     return(
-        <div className="relative">
+        <div>
             <div className="flex items-center">
                 <FaSearch />
-                <input value={input || ''} onChange={handleInputChange} className="mx-2 rounded w-56 text-black" placeholder="Search a movie"/>
+                <input value={input || ''} onChange={handleInputChange} className="mx-2 rounded w-56 text-black px-1" placeholder="Search a movie"/>
             </div>
             {dropdownOpen && (
                 <ul className="absolute z-10 bg-white shadow-lg rounded mt-2 w-56 max-h-60 overflow-y-auto">
