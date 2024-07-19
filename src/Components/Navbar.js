@@ -5,12 +5,21 @@ import { VscAccount } from "react-icons/vsc";
 import { useState } from "react";
 import { CgLogOut } from "react-icons/cg";
 import { SearchBar } from "./SearchBar";
+import { useEffect } from "react";
 
 export const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const auth = useAuth();
+    const userRole = localStorage.getItem('userRole');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(auth.user) {
+            setIsAdmin(userRole === "admin");
+        }
+    }, [auth.user])
 
     const handleLogout = () => {
         auth.logout();
@@ -42,12 +51,14 @@ export const Navbar = () => {
                             Book Tickets
                         </button>
                     </NavLink>
-                    {auth.user && auth.user.role === "admin" && (
+                    {auth.user && isAdmin ? (
                         <NavLink to='/admin'>
                             <button className="inline-block rounded text-red-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                 Panel
                             </button>
                         </NavLink>
+                    ): (
+                        <div></div>
                     )}
                 </div>
                 {!auth.user && (
