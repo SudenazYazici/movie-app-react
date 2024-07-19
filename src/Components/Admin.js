@@ -165,7 +165,7 @@ export const Admin = () => {
                         </div>
                     </div>
                     <div className="flex items-center">
-                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-64">
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
@@ -192,7 +192,7 @@ export const Admin = () => {
                                 </tbody>
                              </table>
                          </div>
-                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-64">
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
