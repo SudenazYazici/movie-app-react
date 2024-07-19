@@ -15,6 +15,7 @@ import { Profile } from './Components/Profile';
 import { AuthProvider } from './Components/auth';
 import { UserTickets } from './Components/UserTickets';
 import { Admin } from './Components/Admin';
+import { AdminRegister } from './Components/AdminRegister';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path='profile' element={<Profile/>}/>
             <Route path='tickets' element={<UserTickets/>}/>
             <Route path='admin' element={<Admin/>}/>
+            <Route path='admin-register' element={<AdminRegister/>}/>
             <Route path='*' element={<NoMatch/>}/>
           </Routes>
         </div>

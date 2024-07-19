@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-export const Register = () => {
+export const AdminRegister = () => {
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ export const Register = () => {
       } = useForm();
 
     const onSubmit = (data) => {
-        const registrationData = { ...data, role: "user" };
+        const registrationData = { ...data, role: "admin" };
         axios.post('https://localhost:7030/api/User/register', registrationData)
             .then(response => {
                 console.log('Registration successful', response.data);
@@ -31,8 +31,10 @@ export const Register = () => {
     return(
         <>
             
+            
             <div className="max-w-md mx-auto">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+                    <div className='text-black font-bold my-4'>Admin Register</div>
                     <div className="mb-4 form-control">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="user-name">
                             User name
