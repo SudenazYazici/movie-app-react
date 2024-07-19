@@ -2,6 +2,6 @@ import { Register } from "./Register";
 
 export const Admin = () => {
     return(
-        <Register/>
+        <div>Admin page</div>
     );
 }
