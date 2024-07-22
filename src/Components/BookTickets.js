@@ -163,7 +163,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}

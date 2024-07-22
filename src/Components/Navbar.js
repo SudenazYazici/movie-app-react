@@ -156,28 +156,28 @@ export const Navbar = () => {
                     {showModal && (
                         <div className="flex flex-col bg-zinc-700">
                             <NavLink to='/'>
-                                <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                <button className="ml-2 mt-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Home
                                 </button>
                             </NavLink>
                             <NavLink to='/movies'>
-                                <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Movies
                                 </button>
                             </NavLink>
                             <NavLink to='/movie-theatres'>
-                                <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Movie Theatres
                                 </button>
                             </NavLink>
                             <NavLink to='/book-tickets'>
-                                <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Book Tickets
                                 </button>
                             </NavLink>
                             {auth.user && isAdmin ? (
                                 <NavLink to='/admin'>
-                                    <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                    <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                         Panel
                                     </button>
                                 </NavLink>
@@ -187,17 +187,17 @@ export const Navbar = () => {
                             {!auth.user ? (
                                 <div className="flex flex-col">
                                     <NavLink to='/admin-register'>
-                                        <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                        <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                             Admin
                                         </button>
                                     </NavLink>
                                     <NavLink to='/login'>
-                                        <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
+                                        <button className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                             Login
                                         </button>
                                     </NavLink>
                                     <NavLink to='/register'>
-                                        <button className="inline-block bg-orange-700 rounded hover:border-gray-200 text-white hover:bg-orange-900 py-1 px-5">
+                                        <button className="ml-2 inline-block bg-orange-700 rounded hover:border-gray-200 text-white hover:bg-orange-900 py-1 px-5">
                                             Sign up
                                         </button>
                                     </NavLink>
@@ -206,7 +206,7 @@ export const Navbar = () => {
                                 <div>
                                     <NavLink to='/tickets'>
                                         <button
-                                            className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white"
+                                            className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white"
                                             onClick={() => setDropdownOpen(false)}
                                         >
                                             <div>
@@ -215,7 +215,7 @@ export const Navbar = () => {
                                         </button>
                                     </NavLink>
                                         <button
-                                            className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white"
+                                            className="ml-2 inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-5 hover:text-white"
                                             onClick={handleLogout}
                                         >
                                             <div className="flex items-center">

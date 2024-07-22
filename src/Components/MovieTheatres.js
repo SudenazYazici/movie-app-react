@@ -36,7 +36,7 @@ export const MovieTheatres = () => {
                     </thead>
                     <tbody>
                         {theatres.map(theatre => (
-                            <tr key={theatre.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr key={theatre.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
                                 <th scope="row" className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {theatre.name}
                                 </th>

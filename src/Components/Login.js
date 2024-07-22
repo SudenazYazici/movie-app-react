@@ -38,12 +38,14 @@ export const Login = () => {
 
     return(
         <>
-            {/* <div>
-                <input placeholder="Email"/>
-                <input placeholder="Password"/>
-            </div>
-            <button>Login</button> */}
-
+            {/* <video
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+            >
+                <source src="../MovieImages/movie_bg_video.mp4" type="video/mp4" />
+            </video> */}
             <div className="max-w-md mx-auto">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4">
