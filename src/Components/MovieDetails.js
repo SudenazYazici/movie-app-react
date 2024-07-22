@@ -41,7 +41,7 @@ export const MovieDetails = () => {
                   height="450" 
                   className="rounded mb-5"
                   />
-                  <div className="ml-5 sm:mt-5">
+                  <div className="ml-5">
                     <div className="flex items-center space-x-2">
                       <h2 className="font-bold">Movie Name:</h2>
                       <p>{movie.name}</p>

@@ -145,17 +145,17 @@ export const BookTickets = () => {
             )}
             {auth.user && (
                 <div>
-                    <div className="relative overflow-x-auto rounded mt-10 mx-10">
+                    <div className="relative overflow-x-auto rounded mt-2 mx-2 sm:mt-10 sm:mx-10">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-2 py-1 sm:px-6 sm:py-3">
                                         Theatre name
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-2 py-1 sm:px-6 sm:py-3">
                                         City
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-2 py-1 sm:px-6 sm:py-3">
                                         Address
                                     </th>
                                 </tr>
@@ -165,13 +165,13 @@ export const BookTickets = () => {
                                     <tr key={theatre.id}
                                     className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
-                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-2 py-1 sm:px-6 sm:py-3">
                                             {theatre.city}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-2 py-1 sm:px-6 sm:py-3">
                                             {theatre.address}
                                         </td>
                                     </tr>
@@ -210,10 +210,10 @@ export const BookTickets = () => {
                             </button>
                         </div>
                     )} */}
-                    <div className="flex">
+                    <div className="flex flex-col sm:flex-row">
 
                         {selectedTheatreId && (
-                            <div className="mt-10 mx-10">
+                            <div className="mt-2 sm:mt-10 mx-10">
                                 <label htmlFor="cinemaHall" className="block text-sm font-medium text-gray-700">Select Cinema Hall</label>
                                 <select
                                     id="cinemaHall"
@@ -230,7 +230,7 @@ export const BookTickets = () => {
                         )}
 
                         {selectedTheatreId && (
-                            <div className="mt-10 mx-10">
+                            <div className="mt-2 sm:mt-10 mx-10">
                                 <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
                                 <select
                                     id="seat"
@@ -247,7 +247,7 @@ export const BookTickets = () => {
                         )}
 
                         {selectedTheatreId && (
-                            <div className="mt-10 mx-10">
+                            <div className="mt-2 sm:mt-10 mx-10">
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
                                 <DatePicker
                                     id="dateTime"
@@ -265,7 +265,7 @@ export const BookTickets = () => {
                         )}
 
                         {selectedTheatreId && selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime && (
-                            <div className="text-center mt-10 mx-10">
+                            <div className="text-center mt-2 sm:mt-10 mx-10 mb-5">
                                 <button
                                     className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                                     onClick={handleSubmit}
