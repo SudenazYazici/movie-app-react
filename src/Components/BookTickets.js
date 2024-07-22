@@ -267,7 +267,7 @@ export const BookTickets = () => {
                         {selectedTheatreId && selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime && (
                             <div className="text-center mt-2 sm:mt-10 mx-10 mb-5">
                                 <button
-                                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-red-900 hover:bg-red-950 text-white font-bold py-2 px-4 rounded"
                                     onClick={handleSubmit}
                                 >
                                     Book Ticket

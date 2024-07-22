@@ -55,11 +55,11 @@ export const Register = () => {
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
-                        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" {...register("password", { required: true })}/>
-                        <p className="text-red-500 text-xs italic">Please choose a password.</p>
+                        <input className="shadow appearance-none border border-orange-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" {...register("password", { required: true })}/>
+                        <p className="text-orange-500 text-xs italic">Please choose a password.</p>
                     </div>
                     <div className="flex items-center justify-between form-control">
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Sign Up
                         </button>
                         {/* <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
@@ -69,7 +69,7 @@ export const Register = () => {
                             Already have an account? Log in.
                         </Link>
                     </div>
-                    {isError && <p className="mt-5 text-red-500 text-xs italic">There was an error registering! Please try again.</p>}
+                    {isError && <p className="mt-5 text-orange-500 text-xs italic">There was an error registering! Please try again.</p>}
                 </form>
             </div>
 

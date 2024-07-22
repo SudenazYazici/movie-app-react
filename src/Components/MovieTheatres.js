@@ -48,7 +48,7 @@ export const MovieTheatres = () => {
                                 </td>
                                 <td className="px-2 py-1 sm:px-6 sm:py-3">
                                 <Link to='/book-tickets'>
-                                    <button className="inline-block bg-green-700 rounded hover:border-gray-200 text-white hover:bg-green-900 py-1 px-3">
+                                    <button className="inline-block bg-red-900 rounded hover:border-gray-200 text-white hover:bg-red-950 py-1 px-3">
                                         Buy Ticket
                                     </button>
                                 </Link>

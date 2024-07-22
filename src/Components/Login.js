@@ -62,7 +62,7 @@ export const Login = () => {
                             Password
                         </label>
                         <input 
-                        className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                        className="shadow appearance-none border border-orange-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password" 
                         type="password" 
                         placeholder="******************" 
@@ -70,7 +70,7 @@ export const Login = () => {
                         {/* <p className="text-red-500 text-xs italic">Please enter password.</p> */}
                     </div>
                     <div className="flex items-center justify-between">
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Sign In
                         </button>
                         {/* <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

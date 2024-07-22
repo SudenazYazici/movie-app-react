@@ -51,7 +51,7 @@ export const MovieDetails = () => {
                       <p>{movie.details}</p>
                     </div>
                     <Link to='/book-tickets'>
-                        <button className="mt-5 inline-block bg-green-700 rounded hover:border-gray-200 text-white hover:bg-green-900 py-1 px-3">
+                        <button className="mt-5 inline-block bg-red-900 rounded hover:border-gray-200 text-white hover:bg-red-950 py-1 px-3">
                             Buy Ticket
                         </button>
                     </Link>
