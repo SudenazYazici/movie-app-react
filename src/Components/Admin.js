@@ -111,7 +111,7 @@ export const Admin = () => {
         <div>
             {isAdmin ? (
                 <div>
-                    <div className="flex items-center">
+                    <div className="flex flex-col items-center sm:flex-row">
                         <div className="max-w-md mx-auto w-96 h-96">
                             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitMovie(onMovieSubmit)}>
                                 <div className="text-black font-bold text-center">Add Movie</div>
@@ -166,7 +166,7 @@ export const Admin = () => {
                             </form>
                         </div>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex flex-col items-center sm:flex-row">
                         <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
