@@ -11,7 +11,7 @@ import { FaBars } from "react-icons/fa";
 export const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false);
-    const [menuOpen, setMenuOpen ] = useState(window.innerWidth < 769);
+    const [isMobile, setIsMobile ] = useState(window.innerWidth < 769);
     const [showModal, setShowModal ] = useState(false);
 
     const auth = useAuth();
@@ -26,7 +26,7 @@ export const Navbar = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setMenuOpen(window.innerWidth < 769);
+            setIsMobile(window.innerWidth < 769);
         };
 
         window.addEventListener('resize', handleResize);
@@ -52,7 +52,7 @@ export const Navbar = () => {
 
     return(
         <>
-            {!menuOpen ? ( 
+            {!isMobile ? ( 
                 // Laptop Navbar code
                 <nav className="absolute w-full p-4 flex items-center justify-between z-50">
                     <div>

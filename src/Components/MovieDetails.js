@@ -30,18 +30,18 @@ export const MovieDetails = () => {
     return(
         <>
             {movie ? (
-            <div>
+            <div className="ml-5">
             <h1 className="mb-5 inline-block rounded text-white bg-slate-900 py-1 px-3">Movie Details</h1>
             <div className="movie-item">
-              <div className="mb-5 flex">
+              <div className="mb-5 flex flex-col sm:flex-row">
                 <img 
                   src={getImagePath(movie.name)} 
                   alt={movie.name} 
                   width="300" 
                   height="450" 
-                  className="rounded"
+                  className="rounded mb-5"
                   />
-                  <div className="ml-5">
+                  <div className="ml-5 sm:mt-5">
                     <div className="flex items-center space-x-2">
                       <h2 className="font-bold">Movie Name:</h2>
                       <p>{movie.name}</p>
@@ -66,17 +66,6 @@ export const MovieDetails = () => {
             ) : (
                 <p>Loading...</p>
             )}
-            {/* <img 
-                key={movie.id}
-                src={getImagePath(movieName)} 
-                alt={movieName} 
-                width="100" 
-                height="150" 
-                className="movie-image rounded"
-            />
-            <div className="movie-details">
-                {movieName}
-            </div> */}
         </>
     );
 }
