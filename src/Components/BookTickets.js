@@ -163,7 +163,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-red-200 dark:bg-red-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
@@ -184,7 +184,7 @@ export const BookTickets = () => {
                         <ul className="movie-list mx-10">
                             {movies.map(movie => (
                             <li key={movie.id} 
-                            className={`relative p-4 cursor-pointer ${selectedMovieId === movie.id ? 'border border-red-500 rounded' : ''}`}
+                            className={`relative p-4 cursor-pointer ${selectedMovieId === movie.id ? 'border border-orange-500 rounded' : ''}`}
                             onClick={() => handleMovieClick(movie.id)}>
                                 <div className="movie-container">
                                         <img 
@@ -217,7 +217,7 @@ export const BookTickets = () => {
                                 <label htmlFor="cinemaHall" className="block text-sm font-medium text-gray-700">Select Cinema Hall</label>
                                 <select
                                     id="cinemaHall"
-                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
                                     value={selectedCinemaHallId}
                                     onChange={handleCinemaHallChange}
                                 >
@@ -234,7 +234,7 @@ export const BookTickets = () => {
                                 <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
                                 <select
                                     id="seat"
-                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:orange-indigo-500 sm:text-sm rounded-md"
                                     value={selectedSeatId}
                                     onChange={handleSeatChange}
                                 >
@@ -251,7 +251,7 @@ export const BookTickets = () => {
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
                                 <DatePicker
                                     id="dateTime"
-                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
                                     selected={selectedDateTime}
                                     onChange={handleDateTimeChange}
                                     showTimeSelect
