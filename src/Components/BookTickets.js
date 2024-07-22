@@ -114,7 +114,7 @@ export const BookTickets = () => {
             CinemaHallId: selectedCinemaHallId,
             SeatId: selectedSeatId,
             Date: selectedDateTime.toISOString(),
-            Price: 10 // Assuming a default price
+            Price: 150 // Assuming a default price
         };
 
         axios.post('https://localhost:7030/api/Ticket', ticketData)
