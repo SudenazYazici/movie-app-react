@@ -33,6 +33,7 @@ export const Admin = () => {
             .then(response => {
                 console.log('Registration successful', response.data);
                 setIsError(false);
+                window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding movie!', error);
@@ -45,6 +46,7 @@ export const Admin = () => {
             .then(response => {
                 console.log('Registration successful', response.data);
                 setIsError(false);
+                window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding theatre!', error);
@@ -110,7 +112,7 @@ export const Admin = () => {
             {isAdmin ? (
                 <div>
                     <div className="flex items-center">
-                        <div className="max-w-md mx-auto w-96">
+                        <div className="max-w-md mx-auto w-96 h-96">
                             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitMovie(onMovieSubmit)}>
                                 <div className="text-black font-bold text-center">Add Movie</div>
                                 <div className="mb-4 form-control">
@@ -134,7 +136,7 @@ export const Admin = () => {
                             </form>
                         </div>
                         
-                        <div className="max-w-md mx-auto w-96">
+                        <div className="max-w-md mx-auto w-96 h-96">
                             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitTheatre(onTheatreSubmit)}>
                                 <div className="text-black font-bold text-center">Add Movie Theatre</div>
                                 <div className="mb-4 form-control">
