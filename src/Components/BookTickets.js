@@ -15,7 +15,8 @@ export const BookTickets = () => {
     const [selectedTheatreId, setSelectedTheatreId] = useState("");
     const [cinemaHalls, setCinemaHalls] = useState([]);
     const [selectedCinemaHallId, setSelectedCinemaHallId] = useState("");
-    const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+    const [selectedDateTime, setSelectedDateTime] = useState("");
+    const [dateTimes, setDateTimes] = useState([]);
     const [seats, setSeats] = useState([]);
     const [selectedSeatId, setSelectedSeatId] = useState("");
     const [userTickets, setUserTickets] = useState([]);
@@ -80,6 +81,20 @@ export const BookTickets = () => {
         }
     }, [selectedMovieId, selectedCinemaHallId]);
 
+    useEffect(() => {
+        if (selectedMovieId && selectedCinemaHallId) {
+            axios.get(`https://localhost:7030/api/Session/get-start-time/${selectedMovieId}/${selectedCinemaHallId}`)
+            .then(response => {
+                setDateTimes(response.data);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            })
+        }
+    }, [selectedMovieId, selectedCinemaHallId]);
+    
+
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);
         setSelectedMovieId("");
@@ -90,8 +105,8 @@ export const BookTickets = () => {
     const handleCinemaHallChange = (event) => {
         setSelectedCinemaHallId(event.target.value);
     };
-    const handleDateTimeChange = (date) => {
-        setSelectedDateTime(date);
+    const handleDateTimeChange = (event) => {
+        setSelectedDateTime(event.target.value);
     };
     const handleSeatChange = (event) => {
         setSelectedSeatId(event.target.value);
@@ -113,7 +128,7 @@ export const BookTickets = () => {
             CinemaId: selectedTheatreId,
             CinemaHallId: selectedCinemaHallId,
             SeatId: selectedSeatId,
-            Date: selectedDateTime.toISOString(),
+            Date: selectedDateTime,
             Price: 150 // Assuming a default price
         };
 
@@ -135,6 +150,11 @@ export const BookTickets = () => {
     const today = new Date();
     const oneWeekFromToday = new Date();
     oneWeekFromToday.setDate(today.getDate() + 7);
+
+    const formatDateTime = (dateTime) => {
+        const date = new Date(dateTime);
+        return date.toLocaleString();
+    };
 
     return(
         <>
@@ -249,7 +269,7 @@ export const BookTickets = () => {
                         {selectedTheatreId && (
                             <div className="mt-2 sm:mt-10 mx-10">
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
-                                <DatePicker
+                                {/* <DatePicker
                                     id="dateTime"
                                     className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
                                     selected={selectedDateTime}
@@ -260,7 +280,18 @@ export const BookTickets = () => {
                                     maxDate={oneWeekFromToday}
                                     minTime={new Date(0, 0, 0, 9, 0)}
                                     maxTime={new Date(0, 0, 0, 23, 30)}
-                                />
+                                /> */}
+                                <select
+                                    id="dateTime"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:orange-indigo-500 sm:text-sm rounded-md"
+                                    value={selectedDateTime}
+                                    onChange={handleDateTimeChange}
+                                >
+                                    <option value="">Select a session</option>
+                                    {dateTimes.map((dateTime, index) => (
+                                        <option key={index} value={dateTime}>{formatDateTime(dateTime)}</option>
+                                    ))}
+                                </select>
                             </div>
                         )}
 
