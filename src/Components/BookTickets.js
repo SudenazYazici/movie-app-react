@@ -57,8 +57,8 @@ export const BookTickets = () => {
     }, [selectedTheatreId]);
 
     useEffect(() => {
-        if (selectedTheatreId) {
-            axios.get(`https://localhost:7030/api/Cinema/${selectedTheatreId}/cinemaHalls`)
+        if (selectedMovieId) {
+            axios.get(`https://localhost:7030/api/Movie/${selectedMovieId}/cinemaHalls`)
             .then(response => {
                 setCinemaHalls(response.data);
                 console.log(response.data);
@@ -78,7 +78,7 @@ export const BookTickets = () => {
             })
             }
         }
-    }, [selectedTheatreId, selectedCinemaHallId]);
+    }, [selectedMovieId, selectedCinemaHallId]);
 
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);

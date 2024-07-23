@@ -54,7 +54,7 @@ export const Navbar = () => {
         <>
             {!isMobile ? ( 
                 // Laptop Navbar code
-                <nav className="absolute w-full p-4 flex items-center justify-between z-50">
+                <nav className="absolute w-full p-4 flex items-center justify-between z-50 mt-5">{/*  can be fixed instead of absolute */}
                     <div>
                         <NavLink to='/'>
                             <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
