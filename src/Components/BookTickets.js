@@ -2,12 +2,14 @@ import { useAuth } from "./auth";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 export const BookTickets = () => {
 
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const [movies, setMovies] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState("");
@@ -19,6 +21,7 @@ export const BookTickets = () => {
     const [dateTimes, setDateTimes] = useState([]);
     const [seats, setSeats] = useState([]);
     const [selectedSeatId, setSelectedSeatId] = useState("");
+    const [sessions, setSessions] = useState([]);
     const [userTickets, setUserTickets] = useState([]);
     /* const [startIndex, setStartIndex] = useState(0);
     const moviesPerPage = 6; */
@@ -83,14 +86,22 @@ export const BookTickets = () => {
 
     useEffect(() => {
         if (selectedMovieId && selectedCinemaHallId) {
-            axios.get(`https://localhost:7030/api/Session/get-start-time/${selectedMovieId}/${selectedCinemaHallId}`)
-            .then(response => {
-                setDateTimes(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the data!', error);
-            })
+            axios.get(`https://localhost:7030/api/Session/get-sessions/${selectedMovieId}/${selectedCinemaHallId}`)
+                .then(response => {
+                    setSessions(response.data);
+                    const uniqueDateTimes = Array.from(new Set(
+                        response.data.map(session => {
+                            const date = new Date(session.startDate);
+                            return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                        })
+                    ));
+                    setDateTimes(uniqueDateTimes);
+
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the data!', error);
+                });
         }
     }, [selectedMovieId, selectedCinemaHallId]);
     
@@ -98,9 +109,11 @@ export const BookTickets = () => {
     const handleRowClick = (id) => {
         setSelectedTheatreId(id);
         setSelectedMovieId("");
+        setSelectedCinemaHallId("");
     };
     const handleMovieClick = (id) => {
         setSelectedMovieId(id);
+        setSelectedCinemaHallId("");
     };
     const handleCinemaHallChange = (event) => {
         setSelectedCinemaHallId(event.target.value);
@@ -139,6 +152,10 @@ export const BookTickets = () => {
             .catch(error => {
                 console.error('There was an error buying ticket!', error);
             });
+
+            navigate('/tickets');
+            //window.location.reload();
+        
     };
     /* const handleNextClick = () => { // use these later
         setStartIndex(startIndex + moviesPerPage);
@@ -183,7 +200,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 ${selectedTheatreId === theatre.id ? 'bg-gray-200 dark:bg-gray-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}
@@ -289,7 +306,7 @@ export const BookTickets = () => {
                                 >
                                     <option value="">Select a session</option>
                                     {dateTimes.map((dateTime, index) => (
-                                        <option key={index} value={dateTime}>{formatDateTime(dateTime)}</option>
+                                        <option key={index} value={dateTime}>{dateTime}</option>
                                     ))}
                                 </select>
                             </div>
