@@ -20,8 +20,11 @@ export const BookTickets = () => {
     const [selectedDateTime, setSelectedDateTime] = useState("");
     const [dateTimes, setDateTimes] = useState([]);
     const [seats, setSeats] = useState([]);
+    const [availableSeats, setAvailableSeats] = useState([]);
     const [selectedSeatId, setSelectedSeatId] = useState("");
+    const [unavailableSeatIds, setUnavailableSeatIds] = useState([]);
     const [sessions, setSessions] = useState([]);
+    const [selectedSessionId, setSelectedSessionId] = useState("");
     const [userTickets, setUserTickets] = useState([]);
     /* const [startIndex, setStartIndex] = useState(0);
     const moviesPerPage = 6; */
@@ -80,9 +83,26 @@ export const BookTickets = () => {
             .catch(error => {
                 console.error('There was an error fetching the data!', error);
             })
+
+            axios.get(`https://localhost:7030/api/Ticket/get-unavailable-seat-ids/${selectedMovieId}/${selectedCinemaHallId}`)
+                    .then(response => {
+                        setUnavailableSeatIds(response.data);
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error('There was an error fetching unavailable seat IDs!', error);
+                    });
             }
         }
     }, [selectedMovieId, selectedCinemaHallId]);
+
+    useEffect(() => {
+        // Filter available seats based on unavailable seat IDs
+        if (seats.length > 0 && unavailableSeatIds.length > 0) {
+            const filteredSeats = seats.filter(seat => !unavailableSeatIds.includes(seat.id));
+            setAvailableSeats(filteredSeats);
+        }
+    }, [seats, unavailableSeatIds]);
 
     useEffect(() => {
         if (selectedMovieId && selectedCinemaHallId) {
@@ -90,10 +110,7 @@ export const BookTickets = () => {
                 .then(response => {
                     setSessions(response.data);
                     const uniqueDateTimes = Array.from(new Set(
-                        response.data.map(session => {
-                            const date = new Date(session.startDate);
-                            return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                        })
+                        response.data.map(session => session.startDate)
                     ));
                     setDateTimes(uniqueDateTimes);
 
@@ -104,6 +121,18 @@ export const BookTickets = () => {
                 });
         }
     }, [selectedMovieId, selectedCinemaHallId]);
+
+    useEffect(() => {
+        if (selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime) {
+            axios.get(`https://localhost:7030/api/Session/get-session/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
+                .then(response => {
+                    setSelectedSessionId(response.data.id);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the data!', error);
+                });
+        }
+    }, [selectedSeatId, selectedDateTime]);
     
 
     const handleRowClick = (id) => {
@@ -141,6 +170,7 @@ export const BookTickets = () => {
             CinemaId: selectedTheatreId,
             CinemaHallId: selectedCinemaHallId,
             SeatId: selectedSeatId,
+            SessionId: selectedSessionId,
             Date: selectedDateTime,
             Price: 150 // Assuming a default price
         };
@@ -276,7 +306,7 @@ export const BookTickets = () => {
                                     onChange={handleSeatChange}
                                 >
                                     <option value="">Select a seat</option>
-                                    {seats.map(seat => (
+                                    {availableSeats.map(seat => (
                                         <option key={seat.id} value={seat.id}>{seat.seatNum}</option>
                                     ))}
                                 </select>
