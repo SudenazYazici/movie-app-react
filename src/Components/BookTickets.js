@@ -93,7 +93,7 @@ export const BookTickets = () => {
                 setSeats(response.data);
                 console.log(response.data);
                 if(selectedDateTime) {
-                    axios.get(`https://localhost:7030/api/Ticket/get-unavailable-seat-ids/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
+                    axios.get(`https://localhost:7030/api/Ticket/get-unavailable-seat-ids/${selectedTheatreId}/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
                     .then(response => {
                         setUnavailableSeatIds(response.data || []);
                         console.log(response.data);
@@ -110,7 +110,7 @@ export const BookTickets = () => {
             
             }
         }
-    }, [selectedMovieId, selectedCinemaHallId, selectedDateTime]);
+    }, [selectedMovieId, selectedCinemaHallId, selectedDateTime, selectedTheatreId]);
 
     useEffect(() => {
         if (seats.length > 0) {
@@ -126,7 +126,7 @@ export const BookTickets = () => {
 
     useEffect(() => {
         if (selectedMovieId && selectedCinemaHallId) {
-            axios.get(`https://localhost:7030/api/Session/get-sessions/${selectedMovieId}/${selectedCinemaHallId}`)
+            axios.get(`https://localhost:7030/api/Session/get-sessions/${selectedTheatreId}/${selectedMovieId}/${selectedCinemaHallId}`)
                 .then(response => {
                     setSessions(response.data);
                     const uniqueDateTimes = Array.from(new Set(
@@ -140,11 +140,11 @@ export const BookTickets = () => {
                     console.error('There was an error fetching the data!', error);
                 });
         }
-    }, [selectedMovieId, selectedCinemaHallId]);
+    }, [selectedMovieId, selectedCinemaHallId, selectedTheatreId]);
 
     useEffect(() => {
         if (selectedMovieId && selectedCinemaHallId && selectedSeatId && selectedDateTime) {
-            axios.get(`https://localhost:7030/api/Session/get-session/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
+            axios.get(`https://localhost:7030/api/Session/get-session/${selectedTheatreId}/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
                 .then(response => {
                     setSelectedSessionId(response.data.id);
                 })
@@ -152,7 +152,7 @@ export const BookTickets = () => {
                     console.error('There was an error fetching the data!', error);
                 });
         }
-    }, [selectedSeatId, selectedDateTime]);
+    }, [selectedSeatId, selectedDateTime, selectedTheatreId, selectedCinemaHallId, selectedMovieId]);
     
 
     const handleRowClick = (id) => {
