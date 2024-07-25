@@ -47,7 +47,9 @@ export const MovieTheatres = () => {
                                     {theatre.address}
                                 </td>
                                 <td className="px-2 py-1 sm:px-6 sm:py-3">
-                                <Link to='/book-tickets'>
+                                <Link 
+                                to='/book-tickets'
+                                state={{ theatreId: theatre.id }}>
                                     <button className="inline-block bg-red-900 rounded hover:border-gray-200 text-white hover:bg-red-950 py-1 px-3">
                                         Buy Ticket
                                     </button>

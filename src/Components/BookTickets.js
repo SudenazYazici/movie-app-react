@@ -2,7 +2,7 @@ import { useAuth } from "./auth";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +11,7 @@ export const BookTickets = () => {
     const auth = useAuth();
     const navigate = useNavigate();
 
+    const [theatreId, setTheatreId] = useState(null);
     const [movies, setMovies] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState("");
     const [theatres, setTheatres] = useState([]);
@@ -36,6 +37,18 @@ export const BookTickets = () => {
           return require(`.././MovieImages/default.jpg`);
         }
       };
+
+      const location = useLocation();
+      useEffect(() => {
+        if (location.state && location.state.theatreId) {
+            setTheatreId(location.state.theatreId);
+        }
+    }, [location.state]);
+    useEffect(() => {
+    if (theatreId) {
+        setSelectedTheatreId(theatreId);
+    }
+}, [theatreId]);
     useEffect(() => {
         axios.get('https://localhost:7030/api/Cinema')
         .then(response => {
@@ -256,7 +269,7 @@ export const BookTickets = () => {
                             <tbody>
                                 {theatres.map(theatre => (
                                     <tr key={theatre.id}
-                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 ${selectedTheatreId === theatre.id ? 'bg-gray-200 dark:bg-gray-600' : ''}`}
+                                    className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 ${selectedTheatreId === theatre.id ? 'bg-orange-200 dark:bg-orange-600' : ''}`}
                                      onClick={() => handleRowClick(theatre.id)}>
                                         <td className="px-2 py-1 sm:px-6 sm:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {theatre.name}

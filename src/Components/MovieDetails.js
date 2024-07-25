@@ -50,11 +50,11 @@ export const MovieDetails = () => {
                       <h2 className="font-bold">Movie Details:</h2>
                       <p>{movie.details}</p>
                     </div>
-                    <Link to='/book-tickets'>
+                    {/* <Link to='/book-tickets'>
                         <button className="mt-5 inline-block bg-red-900 rounded hover:border-gray-200 text-white hover:bg-red-950 py-1 px-3">
                             Buy Ticket
                         </button>
-                    </Link>
+                    </Link> */}
                   </div>
                 
               </div>
