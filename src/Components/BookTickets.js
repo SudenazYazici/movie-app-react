@@ -79,30 +79,37 @@ export const BookTickets = () => {
             .then(response => {
                 setSeats(response.data);
                 console.log(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the data!', error);
-            })
-
-            axios.get(`https://localhost:7030/api/Ticket/get-unavailable-seat-ids/${selectedMovieId}/${selectedCinemaHallId}`)
+                if(selectedDateTime) {
+                    axios.get(`https://localhost:7030/api/Ticket/get-unavailable-seat-ids/${selectedMovieId}/${selectedCinemaHallId}/${selectedDateTime}`)
                     .then(response => {
-                        setUnavailableSeatIds(response.data);
+                        setUnavailableSeatIds(response.data || []);
                         console.log(response.data);
                     })
                     .catch(error => {
                         console.error('There was an error fetching unavailable seat IDs!', error);
                     });
+                }
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            })
+
+            
             }
         }
-    }, [selectedMovieId, selectedCinemaHallId]);
+    }, [selectedMovieId, selectedCinemaHallId, selectedDateTime]);
 
     useEffect(() => {
-        // Filter available seats based on unavailable seat IDs
-        if (seats.length > 0 && unavailableSeatIds.length > 0) {
-            const filteredSeats = seats.filter(seat => !unavailableSeatIds.includes(seat.id));
-            setAvailableSeats(filteredSeats);
+        if (seats.length > 0) {
+            if (unavailableSeatIds === null || unavailableSeatIds.length === 0) {
+                setAvailableSeats(seats);
+            } else {
+                const filteredSeats = seats.filter(seat => !unavailableSeatIds.includes(seat.id));
+                setAvailableSeats(filteredSeats);
+            }
         }
     }, [seats, unavailableSeatIds]);
+    
 
     useEffect(() => {
         if (selectedMovieId && selectedCinemaHallId) {
@@ -139,10 +146,20 @@ export const BookTickets = () => {
         setSelectedTheatreId(id);
         setSelectedMovieId("");
         setSelectedCinemaHallId("");
+        setSeats([]);
+        setAvailableSeats([]);
+        setUnavailableSeatIds([]);
+        setDateTimes([]);
+        setSelectedDateTime("");
     };
     const handleMovieClick = (id) => {
         setSelectedMovieId(id);
         setSelectedCinemaHallId("");
+        setSeats([]);
+        setAvailableSeats([]);
+        setUnavailableSeatIds([]);
+        setDateTimes([]);
+        setSelectedDateTime("");
     };
     const handleCinemaHallChange = (event) => {
         setSelectedCinemaHallId(event.target.value);
@@ -161,7 +178,7 @@ export const BookTickets = () => {
             return;
         }
 
-        console.log(auth.user);
+        //console.log(auth.user);
 
         const selectedMovie = movies.find(movie => movie.id === selectedMovieId);
         const ticketData = {
@@ -178,9 +195,11 @@ export const BookTickets = () => {
         axios.post('https://localhost:7030/api/Ticket', ticketData)
             .then(response => {
                 console.log('Registration successful', response.data);
+                //console.log(auth.user.id);
             })
             .catch(error => {
                 console.error('There was an error buying ticket!', error);
+                //console.log(auth.user.id);
             });
 
             navigate('/tickets');
