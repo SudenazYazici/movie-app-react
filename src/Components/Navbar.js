@@ -89,11 +89,11 @@ export const Navbar = () => {
                     {!auth.user && (
                         <div className="flex items-center">
                             <SearchBar/>
-                            <NavLink to='/admin-register'>
+                            {/* <NavLink to='/admin-register'>
                                 <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Admin
                                 </button>
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink to='/login'>
                                 <button className="inline-block rounded text-orange-400 hover:bg-zinc-800 py-1 px-3 hover:text-white" onClick={() => setDropdownOpen(false)}>
                                     Login
