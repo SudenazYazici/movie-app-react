@@ -317,23 +317,6 @@ export const BookTickets = () => {
 
                         {selectedTheatreId && (
                             <div className="mt-2 sm:mt-10 mx-10">
-                                <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
-                                <select
-                                    id="seat"
-                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:orange-indigo-500 sm:text-sm rounded-md"
-                                    value={selectedSeatId}
-                                    onChange={handleSeatChange}
-                                >
-                                    <option value="">Select a seat</option>
-                                    {availableSeats.map(seat => (
-                                        <option key={seat.id} value={seat.id}>{seat.seatNum}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
-
-                        {selectedTheatreId && (
-                            <div className="mt-2 sm:mt-10 mx-10">
                                 <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date and Time</label>
                                 {/* <DatePicker
                                     id="dateTime"
@@ -355,7 +338,24 @@ export const BookTickets = () => {
                                 >
                                     <option value="">Select a session</option>
                                     {dateTimes.map((dateTime, index) => (
-                                        <option key={index} value={dateTime}>{dateTime}</option>
+                                        <option key={index} value={dateTime}>{formatDateTime(dateTime)}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {selectedTheatreId && (
+                            <div className="mt-2 sm:mt-10 mx-10">
+                                <label htmlFor="seat" className="block text-sm font-medium text-gray-700">Select Seat</label>
+                                <select
+                                    id="seat"
+                                    className="mb-5 text-black block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:orange-indigo-500 sm:text-sm rounded-md"
+                                    value={selectedSeatId}
+                                    onChange={handleSeatChange}
+                                >
+                                    <option value="">Select a seat</option>
+                                    {availableSeats.map(seat => (
+                                        <option key={seat.id} value={seat.id}>{seat.seatNum}</option>
                                     ))}
                                 </select>
                             </div>
