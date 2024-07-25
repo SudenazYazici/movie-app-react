@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
         const userInfo = localStorage.getItem('userInfo');
         //const userId = localStorage.getItem('userId');
         if (userInfo) {
-            setUser({ userInfo });
+            setUser( JSON.parse(userInfo) );
             //setUserId({ userId });
         }
     }, []);

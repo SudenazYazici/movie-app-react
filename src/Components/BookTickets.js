@@ -178,6 +178,12 @@ export const BookTickets = () => {
             return;
         }
 
+        if (!auth.user.id) {
+            alert("User is not authenticated.");
+            console.log(auth.user)
+            return;
+        }
+
         //console.log(auth.user);
 
         const selectedMovie = movies.find(movie => movie.id === selectedMovieId);
@@ -191,6 +197,7 @@ export const BookTickets = () => {
             Date: selectedDateTime,
             Price: 150 // Assuming a default price
         };
+        //console.log(ticketData);
 
         axios.post('https://localhost:7030/api/Ticket', ticketData)
             .then(response => {
