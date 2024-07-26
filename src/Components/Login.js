@@ -26,6 +26,8 @@ export const Login = () => {
                 localStorage.setItem('userInfo', user);
                 localStorage.setItem('userId', user.id);
                 localStorage.setItem('userRole', user.role);
+                localStorage.setItem('token', user.token);
+
                 auth.login(user);
                 navigate('/');
             })

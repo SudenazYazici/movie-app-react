@@ -7,6 +7,7 @@ export const Admin = () => {
     const auth = useAuth();
     const [isAdmin, setIsAdmin ] = useState(false);
     const userRole = localStorage.getItem('userRole');
+    const userToken = localStorage.getItem('token');
 
     useEffect(() => {
         if(auth.user) {
@@ -29,22 +30,32 @@ export const Admin = () => {
     } = useForm();
 
     const onMovieSubmit = (data) => {
-        axios.post('https://localhost:7030/api/Movie', data)
-            .then(response => {
-                console.log('Registration successful', response.data);
-                setIsError(false);
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('There was an error adding movie!', error);
-                setIsError(true);
-            });
-    };
+        axios.post('https://localhost:7030/api/Movie', data, {
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          console.log('Movie added successfully', response.data);
+          setIsError(false);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('There was an error adding the movie!', error);
+          setIsError(true);
+        });
+      };
 
     const onTheatreSubmit = (data) => {
-        axios.post('https://localhost:7030/api/Cinema', data)
+        axios.post('https://localhost:7030/api/Cinema', data, {
+            headers: {
+              'Authorization': `Bearer ${userToken}`,
+              'Content-Type': 'application/json'
+            }
+          })
             .then(response => {
-                console.log('Registration successful', response.data);
+                console.log('Theatre added successfully', response.data);
                 setIsError(false);
                 window.location.reload();
             })
@@ -79,7 +90,12 @@ export const Admin = () => {
         const userConfirmed = window.confirm("Are you sure you want to delete this movie?");
 
         if(userConfirmed) {
-            axios.delete(`https://localhost:7030/api/Movie/${movieId}`)
+            axios.delete(`https://localhost:7030/api/Movie/${movieId}`, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => {
                 console.log('Deletion successful', response.data);
                 window.location.reload();
@@ -93,19 +109,23 @@ export const Admin = () => {
 
     const onDeleteCinema = (cinemaId) => {
         const userConfirmed = window.confirm("Are you sure you want to delete this movie theatre?");
-
-        if(userConfirmed) {
-            axios.delete(`https://localhost:7030/api/Cinema/${cinemaId}`)
+        
+        if (userConfirmed) {
+            axios.delete(`https://localhost:7030/api/Cinema/${cinemaId}`, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload();
+                window.location.reload(); // Consider using React state to update the UI instead of reloading
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
             });
         }
-        
-    };
+    }
 
     return(
         <div>
