@@ -86,7 +86,6 @@ export const Admin = () => {
         .then(response => {
           console.log('Movie added successfully', response.data);
           setIsError(false);
-          window.location.reload();
         })
         .catch(error => {
           console.error('There was an error adding the movie!', error);
@@ -104,7 +103,6 @@ export const Admin = () => {
             .then(response => {
                 console.log('Theatre added successfully', response.data);
                 setIsError(false);
-                window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding theatre!', error);
@@ -122,7 +120,6 @@ export const Admin = () => {
             .then(response => {
                 console.log('Cinema hall added successfully', response.data);
                 setIsError(false);
-                window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding cinema hall!', error);
@@ -140,7 +137,6 @@ export const Admin = () => {
             .then(response => {
                 console.log('Seat added successfully', response.data);
                 setIsError(false);
-                window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding seat!', error);
@@ -158,7 +154,7 @@ export const Admin = () => {
             .then(response => {
                 console.log('Session added successfully', response.data);
                 setIsError(false);
-                window.location.reload();
+                //window.location.reload();
             })
             .catch(error => {
                 console.error('There was an error adding session!', error);
@@ -257,7 +253,7 @@ export const Admin = () => {
             })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload(); // Consider using React state to update the UI instead of reloading
+                setTheatres(prevCinemas => prevCinemas.filter(cinema => cinema.id !== cinemaId));
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
@@ -277,7 +273,7 @@ export const Admin = () => {
             })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload(); // Consider using React state to update the UI instead of reloading
+                setCinemaHalls(prevCinemaHalls => prevCinemaHalls.filter(cinemaHall => cinemaHall.id !== cinemaHallId));
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
@@ -297,7 +293,7 @@ export const Admin = () => {
             })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload(); // Consider using React state to update the UI instead of reloading
+                setSeats(prevSeats => prevSeats.filter(seat => seat.id !== seatId));
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
@@ -317,7 +313,7 @@ export const Admin = () => {
             })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload(); // Consider using React state to update the UI instead of reloading
+                setSessions(prevSessions => prevSessions.filter(session => session.id !== sessionId));
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
@@ -337,7 +333,7 @@ export const Admin = () => {
             })
             .then(response => {
                 console.log('Deletion successful', response.data);
-                window.location.reload(); // Consider using React state to update the UI instead of reloading
+                setAdmins(prevAdmins => prevAdmins.filter(admin => admin.id !== adminId));
             })
             .catch(error => {
                 console.error('There was an error deleting!', error);
@@ -348,6 +344,16 @@ export const Admin = () => {
     const getCinemaName = (theatreId) => {
         const theatre = theatres.find(theatre => theatre.id === theatreId);
         return theatre ? theatre.name : 'Unknown Cinema';
+    };
+
+    const getCinemaHallObject = (cinemaHallId) => {
+        const cinemaHall = cinemaHalls.find(cinemaHall => cinemaHall.id === cinemaHallId);
+        return cinemaHall ? cinemaHall : null;
+    };
+
+    const getCinemaHallName = (cinemaHallId) => {
+        const cinemaHall = cinemaHalls.find(cinemaHall => cinemaHall.id === cinemaHallId);
+        return cinemaHall ? cinemaHall.hallNum : 'Unknown Cinema Hall';
     };
 
     const handleMenuSelect = (operation) => {
@@ -578,14 +584,14 @@ export const Admin = () => {
                             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitCinemaHall(onCinemaHallSubmit)}>
                                 <div className="text-black font-bold text-center">Add Cinema Hall</div>
                                 <div className="mb-4 form-control">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema-hall-name">
-                                        Cinema Hall Name/Number
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema-hall-number">
+                                        Cinema Hall Number
                                     </label>
                                     <input 
                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                                        id="cinema-hall-name" 
+                                        id="cinema-hall-number" 
                                         type="text" 
-                                        placeholder="Cinema hall name/number" 
+                                        placeholder="Cinema hall number" 
                                         {...registerCinemaHall("name", { required: true })} 
                                     />
                                 </div>
@@ -639,6 +645,87 @@ export const Admin = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <button onClick={() => onDeleteCinemaHall(cinemaHall.id)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))} 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    )}
+
+                    {selectedOperation === "createSeat" && (
+                        <div className="max-w-md mx-auto w-96 h-96">
+                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitSeat(onSeatSubmit)}>
+                                <div className="text-black font-bold text-center">Add Seat</div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="seat-number">
+                                        Seat Number
+                                    </label>
+                                    <input 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="seat-number" 
+                                        type="text" 
+                                        placeholder="Seat number" 
+                                        {...registerSeat("seatNum", { required: true })} 
+                                    />
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema-hall">
+                                        Cinema Hall
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="cinema-hall" 
+                                        {...registerSeat("cinemaHallId", { required: true })}
+                                    >
+                                        <option value="">Select a cinema hall</option>
+                                        {cinemaHalls.map((cinemaHall) => (
+                                            <option key={cinemaHall.id} value={cinemaHall.id}>{cinemaHall.hallNum}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="flex items-center justify-between form-control">
+                                    <button 
+                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                                        type="submit"
+                                    >
+                                        Add Seat
+                                    </button>
+                                </div>
+                                {isError && <p className="mt-5 text-red-500 text-xs italic">There was an error adding the seat! Please try again.</p>}
+                            </form>
+                        </div>
+                    )}
+
+                    {selectedOperation === "deleteSeat" && (
+                        <div className="flex flex-col items-center sm:flex-row">
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">Seat</th>
+                                        <th scope="col" className="px-6 py-3">Cinema Hall</th>
+                                        <th scope="col" className="px-6 py-3">Cinema</th>
+                                        <th scope="col" className="px-6 py-3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {seats.map(seat => (
+                                        <tr key={seat.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
+                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {seat.seatNum}
+                                            </th>
+                                            <td className="px-6 py-4">
+                                                {getCinemaHallName(seat.cinemaHallId)}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                {getCinemaName(getCinemaHallObject(seat.cinemaHallId).cinemaId)}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <button onClick={() => onDeleteSeat(seat.id)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
                                                     Delete
                                                 </button>
                                             </td>
