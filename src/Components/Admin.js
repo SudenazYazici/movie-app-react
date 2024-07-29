@@ -454,7 +454,7 @@ export const Admin = () => {
             {isAdmin ? (
                 <div>
                     {!isMobile ? ( 
-                        <div className="flex justify-center mt-4 space-x-4 mb-32">
+                        <div className="flex justify-center mt-4 space-x-4 mb-48">
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Cinema</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
