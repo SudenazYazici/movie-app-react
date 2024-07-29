@@ -152,7 +152,6 @@ export const Admin = () => {
                 setIsError(true);
             });
     };
-    // add const for adding admin
     
       useEffect(() => {
 
@@ -389,8 +388,6 @@ export const Admin = () => {
                                 <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
                             </div>
                         </div>
-                        
-                        {/* Add more dropdowns as needed */}
                     </div>
 
                     

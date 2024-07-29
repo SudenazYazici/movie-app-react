@@ -20,7 +20,6 @@ export const AdminRegister = () => {
             .then(response => {
                 console.log('Registration successful', response.data);
                 setIsError(false);
-                navigate('/login');
             })
             .catch(error => {
                 console.error('There was an error registering!', error);
