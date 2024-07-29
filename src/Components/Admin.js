@@ -400,43 +400,43 @@ export const Admin = () => {
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Cinema</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinema' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createCinema')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinema' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinema' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createCinema')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinema' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Movie</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Cinema Hall</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinemaHall' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinemaHall' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinemaHall' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinemaHall' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Seat</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSeat' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createSeat')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSeat' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSeat' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createSeat')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSeat' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Session</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSession' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createSession')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSession' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSession' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSession' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Admin</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createAdmin' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createAdmin')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteAdmin' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createAdmin' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createAdmin')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteAdmin' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -445,43 +445,43 @@ export const Admin = () => {
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Cinema</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinema' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createCinema')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinema' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinema' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createCinema')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinema' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Movie</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Cinema Hall</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinemaHall' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinemaHall' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createCinemaHall' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteCinemaHall' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Seat</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSeat' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createSeat')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSeat' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSeat' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createSeat')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSeat' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Session</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSession' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createSession')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSession' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createSession' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteSession' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Admin</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createAdmin' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('createAdmin')}>Create</button>
-                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteAdmin' ? 'bg-orange-500' : ''}`} onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'createAdmin' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createAdmin')}>Create</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteAdmin' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
                                 </div>
                             </div>
                         </div>
