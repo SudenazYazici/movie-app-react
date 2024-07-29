@@ -11,7 +11,6 @@ import { Login } from './Components/Login';
 import { BookTickets } from './Components/BookTickets';
 import { MovieDetails } from './Components/MovieDetails';
 import { NoMatch } from './Components/NoMatch';
-import { Profile } from './Components/Profile';
 import { AuthProvider } from './Components/auth';
 import { UserTickets } from './Components/UserTickets';
 import { Admin } from './Components/Admin';
@@ -32,7 +31,6 @@ function App() {
             <Route path='book-tickets' element={<BookTickets/>}/>
             <Route path='register' element={<Register/>}/>
             <Route path='login' element={<Login/>}/>
-            <Route path='profile' element={<Profile/>}/>
             <Route path='tickets' element={<UserTickets/>}/>
             <Route path='admin' element={<Admin/>}/>
             <Route path='admin-register' element={<AdminRegister/>}/>
