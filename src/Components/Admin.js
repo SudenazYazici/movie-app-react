@@ -393,6 +393,25 @@ export const Admin = () => {
         }
     }
 
+    const onDeleteCinemaMovie = (cinemaId, movieId) => {
+        const userConfirmed = window.confirm("Are you sure you want to delete this movie from the cinema?");
+        
+        if (userConfirmed) {
+            axios.delete(`https://localhost:7030/api/Movie/${movieId}/delete-from-cinema/${cinemaId}`, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log('Deletion successful', response.data);
+            })
+            .catch(error => {
+                console.error('There was an error deleting!', error);
+            });
+        }
+    }
+
     const getCinemaName = (theatreId) => {
         const theatre = theatres.find(theatre => theatre.id === theatreId);
         return theatre ? theatre.name : 'Unknown Cinema';
@@ -423,6 +442,11 @@ export const Admin = () => {
 
     const handleCinemaChange = (event) => {
         setSelectedCinemaId(event.target.value);
+    };
+
+    const handleCinemaSelectionChange = (e) => {
+        setSelectedCinema(e.target.value);
+        handleCinemaChange(e);
     };
 
     return(
@@ -688,6 +712,50 @@ export const Admin = () => {
                                     >
                                         Add Movie to Cinema
                                     </button>
+                            </form>
+                        </div>
+                    )}
+
+                    {selectedOperation === "removeCinemaMovie" && (
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 mb-20">
+                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                <div className="text-black font-bold text-center">Remove Movie from Cinema</div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema">
+                                         Cinema
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="cinema" 
+                                        onChange={handleCinemaSelectionChange}
+                                        value={selectedCinemaId}
+                                    >
+                                        <option value="">Select a cinema</option>
+                                        {theatres.map((theatre) => (
+                                            <option key={theatre.id} value={theatre.id}>{theatre.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="movie">
+                                         Movie
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="movie" 
+                                        onChange={handleMovieChange}
+                                        value={selectedMovieId}
+                                    >
+                                        <option value="">Select a movie</option>
+                                        {movies.map((movie) => (
+                                            <option key={movie.id} value={movie.id}>{movie.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                
+                                <button onClick={() => onDeleteCinemaMovie(selectedCinemaId, selectedMovieId)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
+                                    Delete
+                                </button>
                             </form>
                         </div>
                     )}
