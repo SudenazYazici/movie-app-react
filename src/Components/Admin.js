@@ -12,6 +12,7 @@ export const Admin = () => {
     const [isMobile, setIsMobile ] = useState(window.innerWidth < 769);
 
     const [selectedOperation, setSelectedOperation] = useState(null);
+    const [selectedCinema, setSelectedCinema] = useState('');
 
     useEffect(() => {
         if(auth.user) {
@@ -220,6 +221,31 @@ export const Admin = () => {
             });
       }, []);
 
+      useEffect(() => {
+        if (selectedCinema) {
+            axios.get(`https://localhost:7030/api/Cinema/${selectedCinema}/movies`)
+                .then(response => {
+                    setMovies(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching movies!', error);
+                });
+        } else {
+            setMovies([]);
+        }
+        if (selectedCinema) {
+            axios.get(`https://localhost:7030/api/Cinema/${selectedCinema}/cinemaHalls`)
+                .then(response => {
+                    setCinemaHalls(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching cinema halls!', error);
+                });
+        } else {
+            setCinemaHalls([]);
+        }
+    }, [selectedCinema]);
+
     const onDeleteMovie = (movieId) => {
         const userConfirmed = window.confirm("Are you sure you want to delete this movie?");
 
@@ -356,6 +382,11 @@ export const Admin = () => {
         return cinemaHall ? cinemaHall.hallNum : 'Unknown Cinema Hall';
     };
 
+    const getMovieName = (movieId) => {
+        const movie = movies.find(movie => movie.id === movieId);
+        return movie ? movie.name : 'Unknown Movie';
+    };
+
     const handleMenuSelect = (operation) => {
         setSelectedOperation(operation);
     };
@@ -388,17 +419,17 @@ export const Admin = () => {
                                 </div>
                             </div>
                             <div className="relative group">
-                                <button className="p-2 border border-orange-500 rounded">Session</button>
-                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
-                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
-                                </div>
-                            </div>
-                            <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Seat</button>
                                 <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
                                     <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSeat')}>Create</button>
                                     <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Session</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
@@ -433,17 +464,17 @@ export const Admin = () => {
                                 </div>
                             </div>
                             <div className="relative group">
-                                <button className="p-2 border border-orange-500 rounded">Session</button>
-                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
-                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
-                                </div>
-                            </div>
-                            <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Seat</button>
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
                                     <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSeat')}>Create</button>
                                     <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Session</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
                                 </div>
                             </div>
                             <div className="relative group">
@@ -548,34 +579,32 @@ export const Admin = () => {
                     {/* </div> */}
 
                     {selectedOperation === "deleteMovie" && (
-                        <div className="flex flex-col items-center sm:flex-row">
-                            <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
-                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" className="px-6 py-3">
-                                                All Movies
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">
+                                            All Movies
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {movies.map(movie => (
+                                        <tr key={movie.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
+                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {movie.name}
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
-                                            </th>
+                                            <td className="px-6 py-4">
+                                            <button onClick={() => onDeleteMovie(movie.id)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
+                                                Delete
+                                            </button>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {movies.map(movie => (
-                                            <tr key={movie.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
-                                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {movie.name}
-                                                </th>
-                                                <td className="px-6 py-4">
-                                                <button onClick={() => onDeleteMovie(movie.id)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
-                                                    Delete
-                                                </button>
-                                                </td>
-                                            </tr>
-                                        ))} 
-                                    </tbody>
-                                </table>
-                            </div>
+                                    ))} 
+                                </tbody>
+                            </table>
                         </div>
                     )}
 
@@ -624,7 +653,6 @@ export const Admin = () => {
                     )}
 
                     {selectedOperation === "deleteCinemaHall" && (
-                        <div className="flex flex-col items-center sm:flex-row">
                         <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -653,7 +681,6 @@ export const Admin = () => {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
                     )}
 
                     {selectedOperation === "createSeat" && (
@@ -701,7 +728,6 @@ export const Admin = () => {
                     )}
 
                     {selectedOperation === "deleteSeat" && (
-                        <div className="flex flex-col items-center sm:flex-row">
                         <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 h-96 mb-20">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -734,7 +760,139 @@ export const Admin = () => {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    )}
+
+                    {selectedOperation === "createSession" && (
+                        <div className="max-w-md mx-auto w-96 h-96">
+                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitSession(onSessionSubmit)}>
+                                <div className="text-black font-bold text-center">Add Session</div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema">
+                                        Cinema
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="cinema" 
+                                        {...registerSession("cinemaId", { required: true })}
+                                        onChange={(e) => setSelectedCinema(e.target.value)}
+                                    >
+                                        <option value="">Select a cinema</option>
+                                        {theatres.map((theatre) => (
+                                            <option key={theatre.id} value={theatre.id}>{theatre.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="movie">
+                                        Movie
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="movie" 
+                                        {...registerSession("movieId", { required: true })}
+                                    >
+                                        <option value="">Select a movie</option>
+                                        {movies.map((movie) => (
+                                            <option key={movie.id} value={movie.id}>{movie.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema-hall">
+                                        Cinema Hall
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="cinema-hall" 
+                                        {...registerSession("cinemaHallId", { required: true })}
+                                    >
+                                        <option value="">Select a cinema hall</option>
+                                        {cinemaHalls.map((cinemaHall) => (
+                                            <option key={cinemaHall.id} value={cinemaHall.id}>{cinemaHall.hallNum}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="startDate">
+                                        Start Date
+                                    </label>
+                                    <input 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="startDate" 
+                                        type="datetime-local" 
+                                        {...registerSession("startDate", { required: true })} 
+                                    />
+                                </div>
+
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endDate">
+                                        End Date
+                                    </label>
+                                    <input 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="endDate" 
+                                        type="datetime-local" 
+                                        {...registerSession("endDate", { required: true })} 
+                                    />
+                                </div>
+
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="duration">
+                                        Duration (in minutes)
+                                    </label>
+                                    <input 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="duration" 
+                                        type="number" 
+                                        {...registerSession("durationInMinutes", { required: true })} 
+                                    />
+                                </div>
+                                <div className="flex items-center justify-between form-control">
+                                    <button 
+                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                                        type="submit"
+                                    >
+                                        Add Session
+                                    </button>
+                                </div>
+                                {isError && <p className="mt-5 text-red-500 text-xs italic">There was an error adding the session! Please try again.</p>}
+                            </form>
+                        </div>
+                    )}
+
+                    {selectedOperation === "deleteSession" && (
+                        <div className="relative overflow-scroll rounded mt-10 max-w-3xl mx-auto mb-20">
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">Cinema</th>
+                                        <th scope="col" className="px-6 py-3">Cinema Hall</th>
+                                        <th scope="col" className="px-6 py-3">Movie</th>
+                                        <th scope="col" className="px-6 py-3">Start Date</th>
+                                        <th scope="col" className="px-6 py-3">End Date</th>
+                                        <th scope="col" className="px-6 py-3">Duration</th>
+                                        <th scope="col" className="px-6 py-3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {sessions.map(session => (
+                                    <tr key={session.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
+                                        <td className="px-6 py-4">{getCinemaName(session.cinemaId)}</td>
+                                        <td className="px-6 py-4">{getCinemaHallName(session.cinemaHallId)}</td>
+                                        <td className="px-6 py-4">{getMovieName(session.movieId)}</td>
+                                        <td className="px-6 py-4">{new Date(session.startDate).toLocaleString()}</td>
+                                        <td className="px-6 py-4">{new Date(session.endDate).toLocaleString()}</td>
+                                        <td className="px-6 py-4">{session.durationInMinutes} mins</td>
+                                        <td className="px-6 py-4">
+                                            <button onClick={() => onDeleteSession(session.id)} className="inline-block bg-red-700 rounded hover:border-gray-200 text-white hover:bg-red-900 py-1 px-3">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))} 
+                                </tbody>
+                            </table>
+                        </div>
                     )}
 
                     {selectedOperation === "createAdmin" && (
