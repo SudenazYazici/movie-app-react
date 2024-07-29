@@ -77,6 +77,12 @@ export const Admin = () => {
         formState: { errors: adminErrors },
     } = useForm();
 
+    const {
+        register: registerCinemaMovie,
+        handleSubmit: handleSubmitCinemaMovie,
+        formState: { errors: cinemaMovieErrors },
+    } = useForm();
+
     const onMovieSubmit = (data) => {
         axios.post('https://localhost:7030/api/Movie', data, {
           headers: {
@@ -162,6 +168,26 @@ export const Admin = () => {
                 setIsError(true);
             });
     };
+
+    const [selectedMovieId, setSelectedMovieId] = useState("");
+    const [selectedCinemaId, setSelectedCinemaId] = useState("");
+
+    const onCinemaMovieSubmit = (data) => {
+        axios.post(`https://localhost:7030/api/Movie/${selectedMovieId}/post-to-cinema/${selectedCinemaId}`, data, {
+            headers: {
+              'Authorization': `Bearer ${userToken}`,
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => {
+                console.log('Movie added to cinema successfully', response.data);
+                setIsError(false);
+            })
+            .catch(error => {
+                console.error('There was an error adding movie to cinema!', error);
+                setIsError(true);
+            });
+    }
     
       useEffect(() => {
 
@@ -391,6 +417,14 @@ export const Admin = () => {
         setSelectedOperation(operation);
     };
 
+    const handleMovieChange = (event) => {
+        setSelectedMovieId(event.target.value);
+    };
+
+    const handleCinemaChange = (event) => {
+        setSelectedCinemaId(event.target.value);
+    };
+
     return(
         <div>
             {isAdmin ? (
@@ -406,9 +440,11 @@ export const Admin = () => {
                             </div>
                             <div className="relative group">
                                 <button className="p-2 border border-orange-500 rounded">Movie</button>
-                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10 min-w-[200px]">
                                     <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
                                     <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'addCinemaMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('addCinemaMovie')}>Add to Cinema</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'removeCinemaMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('removeCinemaMovie')}>Remove from Cinema</button>
                                 </div>
                             </div>
                             <div className="relative group">
@@ -454,6 +490,8 @@ export const Admin = () => {
                                 <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
                                     <button className={`block px-4 py-2 text-left ${selectedOperation === 'createMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('createMovie')}>Create</button>
                                     <button className={`block px-4 py-2 text-left ${selectedOperation === 'deleteMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'addCinemaMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('addCinemaMovie')}>Add to Cinema</button>
+                                    <button className={`block px-4 py-2 text-left ${selectedOperation === 'removeCinemaMovie' ? 'bg-orange-600' : ''}`} onClick={() => handleMenuSelect('removeCinemaMovie')}>Remove from Cinema</button>
                                 </div>
                             </div>
                             <div className="relative group">
@@ -605,6 +643,52 @@ export const Admin = () => {
                                     ))} 
                                 </tbody>
                             </table>
+                        </div>
+                    )}
+
+                    {selectedOperation === "addCinemaMovie" && (
+                        <div className="relative overflow-scroll rounded mt-10 max-w-md mx-auto w-96 mb-20">
+                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmitCinemaMovie(onCinemaMovieSubmit)}>
+                                <div className="text-black font-bold text-center">Add Movie to Cinema</div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="movie">
+                                         Movie
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="movie" 
+                                        onChange={handleMovieChange}
+                                        value={selectedMovieId}
+                                    >
+                                        <option value="">Select a movie</option>
+                                        {movies.map((movie) => (
+                                            <option key={movie.id} value={movie.id}>{movie.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-4 form-control">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinema">
+                                         Cinema
+                                    </label>
+                                    <select 
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                        id="cinema" 
+                                        onChange={handleCinemaChange}
+                                        value={selectedCinemaId}
+                                    >
+                                        <option value="">Select a cinema</option>
+                                        {theatres.map((theatre) => (
+                                            <option key={theatre.id} value={theatre.id}>{theatre.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <button 
+                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                                        type="submit"
+                                    >
+                                        Add Movie to Cinema
+                                    </button>
+                            </form>
                         </div>
                     )}
 
