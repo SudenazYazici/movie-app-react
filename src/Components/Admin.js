@@ -9,6 +9,7 @@ export const Admin = () => {
     const [isAdmin, setIsAdmin ] = useState(false);
     const userRole = localStorage.getItem('userRole');
     const userToken = localStorage.getItem('token');
+    const [isMobile, setIsMobile ] = useState(window.innerWidth < 769);
 
     const [selectedOperation, setSelectedOperation] = useState(null);
 
@@ -17,6 +18,18 @@ export const Admin = () => {
             setIsAdmin(userRole === "admin");
         }
     }, [auth.user])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 769);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const [isError, setIsError] = useState(false);
 
@@ -345,52 +358,99 @@ export const Admin = () => {
         <div>
             {isAdmin ? (
                 <div>
-                    <div className="flex justify-center mt-4 space-x-4 mb-32">
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Cinema</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinema')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
+                    {!isMobile ? ( 
+                        <div className="flex justify-center mt-4 space-x-4 mb-32">
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Cinema</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinema')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Movie</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createMovie')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Cinema Hall</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Session</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Seat</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSeat')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Admin</button>
+                                <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createAdmin')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
+                                </div>
                             </div>
                         </div>
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Movie</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createMovie')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                    ):(
+                        <div className="flex flex-col space-y-4">
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Cinema</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinema')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinema')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Movie</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createMovie')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteMovie')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Cinema Hall</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Session</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Seat</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSeat')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <button className="p-2 border border-orange-500 rounded">Admin</button>
+                                <div className="left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createAdmin')}>Create</button>
+                                    <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
+                                </div>
                             </div>
                         </div>
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Cinema Hall</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createCinemaHall')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteCinemaHall')}>Delete</button>
-                            </div>
-                        </div>
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Session</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSession')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSession')}>Delete</button>
-                            </div>
-                        </div>
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Seat</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createSeat')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteSeat')}>Delete</button>
-                            </div>
-                        </div>
-                        <div className="relative group">
-                            <button className="p-2 border border-orange-500 rounded">Admin</button>
-                            <div className="absolute left-0 hidden mt-1 space-y-1 border border-orange-500 rounded shadow-lg group-hover:block group-focus-within:block z-10">
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('createAdmin')}>Create</button>
-                                <button className="block px-4 py-2 text-left" onClick={() => handleMenuSelect('deleteAdmin')}>Delete</button>
-                            </div>
-                        </div>
-                    </div>
-
+                    )}
                     
+
                     {/* <div className="flex flex-col items-center sm:flex-row"> */}
                     {selectedOperation === "createCinema" && (
                         <div className="max-w-md mx-auto w-96 h-96">
