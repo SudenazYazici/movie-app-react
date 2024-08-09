@@ -1,3 +1,6 @@
+This is my project that I did during my internship.
+You can find the backend part in [here](https://github.com/SudenazYazici/CinemaApp).
+
 ![image](https://github.com/user-attachments/assets/da2a7bd0-3e22-4eb1-8623-c5de0ca48859)
 ![image](https://github.com/user-attachments/assets/c2fc24c3-ec2d-49d6-b826-5d909d3eddc4)
 ![image](https://github.com/user-attachments/assets/1e446bf8-5992-4a98-8b92-c771811baab0)
